@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import fr.imt.pokedex.PokedexListActivity.Companion.getAssetsDrawable
+import fr.imt.pokedex.data.DBHelper
 import fr.imt.pokedex.model.Pokemon
 class PokemonCardActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,7 @@ class PokemonCardActivity: AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         bundle?.let {
             bundle.apply {
-                val pokemon: Pokemon? = getParcelable("pokemon")
+                val pokemon: Pokemon? = DBHelper(this@PokemonCardActivity).getPokemonById(bundle.getInt("pokemon_id"))
                 if (pokemon != null) {
                     loadPokemon(pokemon)
                 } else {
